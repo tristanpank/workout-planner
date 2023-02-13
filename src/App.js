@@ -1,16 +1,14 @@
 import { useState } from 'react';
-import { signIn, signOutUser } from "./firebase/auth";
+import Login from './components/login';
 
 
 function App() {
-  const [currUser, setCurrUser] = useState({displayName: ""});
-  
+  const [currUser, setCurrUser] = useState(null);
 
   return(
     <div>
-      <button onClick={() => signIn(setCurrUser)}>Sign In</button>
-      <button onClick={() => signOutUser(setCurrUser)}>Sign Out</button>
-      <div>{currUser.displayName}</div>
+      <Login setCurrUser={setCurrUser} />
+      <div>{(currUser==null) ? "no user" : currUser.displayName}</div>
     </div>
   )
 }

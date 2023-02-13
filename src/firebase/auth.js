@@ -1,9 +1,9 @@
 import { auth } from "./firebase.config";
-import { signInWithPopup, signOut, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
 
 const provider = new GoogleAuthProvider();
 
-export async function signIn(setCurrUser) {
+export async function signIn() {
   signInWithPopup(auth, provider)
   .then((result) => {
     // This gives you a Google Access Token. You can use it to access the Google API.
@@ -12,7 +12,7 @@ export async function signIn(setCurrUser) {
     // The signed-in user info.
     const user = result.user;
     console.log(user);
-    setCurrUser(user);
+    // setCurrUser(user);
     // IdP data available using getAdditionalUserInfo(result)
     // ...
   }).catch((error) => {
@@ -27,9 +27,8 @@ export async function signIn(setCurrUser) {
   });
 }
 
-export function signOutUser(setCurrUser) {
+export function signOutUser() {
   signOut(auth).then(() => {
     console.log(auth.currentUser);
   });
-  setCurrUser({displayName: ""});
 }
