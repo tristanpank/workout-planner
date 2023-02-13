@@ -1,5 +1,6 @@
 import { auth } from "./firebase.config";
 import { signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { setUserDB } from "./db";
 
 const provider = new GoogleAuthProvider();
 
@@ -12,6 +13,8 @@ export async function signIn() {
     // The signed-in user info.
     const user = result.user;
     console.log(user);
+    // Sets/updates current user in database
+    setUserDB(user);
     // setCurrUser(user);
     // IdP data available using getAdditionalUserInfo(result)
     // ...
