@@ -1,5 +1,5 @@
 import { db } from "./firebase.config";
-import { doc, setDoc, collection, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, arrayUnion, updateDoc } from "firebase/firestore";
 
 
 // Sets user variables whenever a user is logged in
@@ -59,5 +59,16 @@ export async function addDay(user, day) {
     date: day.date,
     workouts: day.workouts,
   })
+  return true;
+}
+
+export async function addWorkout(user, workout) {
+  const type = workout.type;
+  if (type !== "run" || type !== "bike" || type !== "swim") {
+    return false;
+  }
+  await updateDoc(doc(db, "users", user.uid, "workouts", type), {
+    workouts: arrayUnion(workout),
+  });
   return true;
 }
