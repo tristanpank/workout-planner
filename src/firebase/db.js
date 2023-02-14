@@ -36,3 +36,28 @@ export async function setUserDB(user) {
   //   day: "testday"
   // });
 };
+
+
+export async function addDay(user, day) {
+  // Checks if workout properites are defined
+  // Also if length is correct
+  if (day.date === undefined || day.workouts === undefined) {
+    return false;
+  }
+  if (Object.keys(day).length !== 2) {
+    return false;
+  }
+  const workouts = day.workouts;
+  if (workouts.time === undefined || workouts.type === undefined || workouts.duration === undefined || workouts.distance === undefined || workouts.tags === undefined) {
+    console.log("test");
+    return false;
+  }
+  if (Object.keys(workouts).length !== 5) {
+    return false;
+  }
+  await setDoc(doc(db, "users", user.uid, "days", day.date), {
+    date: day.date,
+    workouts: day.workouts,
+  })
+  return true;
+}
