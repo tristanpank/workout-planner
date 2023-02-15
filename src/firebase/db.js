@@ -37,8 +37,8 @@ export async function setUserDB(user) {
   // });
 };
 
-
-export async function addDay(user, day) {
+// Adds/sets a day document to a given user
+export async function setDay(user, day) {
   // Checks if workout properites are defined
   // Also if length is correct
   if (day.date === undefined || day.workouts === undefined) {
@@ -55,6 +55,9 @@ export async function addDay(user, day) {
   if (Object.keys(workouts).length !== 5) {
     return false;
   }
+  
+  // if format/num of attributes is correct
+  // Adds the day to the db
   await setDoc(doc(db, "users", user.uid, "days", day.date), {
     date: day.date,
     workouts: day.workouts,
@@ -62,6 +65,7 @@ export async function addDay(user, day) {
   return true;
 }
 
+// Adds a workout JSON to the workout array in firestore
 export async function addWorkout(user, workout) {
   const type = workout.type;
   if (type !== "run" || type !== "bike" || type !== "swim") {
@@ -73,6 +77,7 @@ export async function addWorkout(user, workout) {
   return true;
 }
 
+// Removes a given workout JSON from the workout array in firestore
 export async function removeWorkout(user, workout) {
   const type = workout.type;
   if (type !== "run" || type !== "bike" || type !== "swim") {

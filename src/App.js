@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Login from './components/login';
-import { addDay } from './firebase/db';
+import { setDay } from './firebase/db';
+import { signOutUser } from './firebase/auth';
 
 
 const testDay = {
@@ -8,8 +9,8 @@ const testDay = {
   workouts: {
     time: 20,
     distance: 10,
-    duration: 25,
-    type: "recovery",
+    duration: 15,
+    type: "tempo",
     tags: "recovery"
   }
 }
@@ -17,14 +18,21 @@ const testDay = {
 function App() {
   const [currUser, setCurrUser] = useState(null);
   async function handleClick() {
-    let test = await addDay(currUser, testDay);
+    let test = await setDay(currUser, testDay);
     console.log(test);
   }
+
+  if (currUser === null) {
+    return (
+      <Login setCurrUser={setCurrUser} />
+    )
+  }
+
   return(
     <div>
-      <Login setCurrUser={setCurrUser} />
-      <div>{(currUser==null) ? "no user" : currUser.displayName}</div>
+      <div>{currUser.displayName}</div>
       <button onClick={handleClick}>Add Day</button>
+      <button onClick={signOutUser}>Sign Out</button>
     </div>
   )
 }

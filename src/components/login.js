@@ -8,9 +8,10 @@ export default function Login({setCurrUser}) {
   })
   
   return (
-    <>
+    <div>
+      <div>Welcome to Workout Planner</div>
       <button onClick={signIn}>Sign In</button>
       <button onClick={signOutUser}>Sign Out</button>
-    </>
+    </div>
   )
 }
