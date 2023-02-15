@@ -1,5 +1,5 @@
 import { db } from "./firebase.config";
-import { doc, setDoc, getDoc, arrayUnion, updateDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, arrayUnion, updateDoc, arrayRemove } from "firebase/firestore";
 
 
 // Sets user variables whenever a user is logged in
@@ -69,6 +69,17 @@ export async function addWorkout(user, workout) {
   }
   await updateDoc(doc(db, "users", user.uid, "workouts", type), {
     workouts: arrayUnion(workout),
+  });
+  return true;
+}
+
+export async function removeWorkout(user, workout) {
+  const type = workout.type;
+  if (type !== "run" || type !== "bike" || type !== "swim") {
+    return false;
+  }
+  await updateDoc(doc(db, "users", user.uid, "workouts", type), {
+    workouts: arrayRemove(workout),
   });
   return true;
 }
