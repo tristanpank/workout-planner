@@ -88,3 +88,16 @@ export async function removeWorkout(user, workout) {
   });
   return true;
 }
+
+export async function getWorkouts(user, type) {
+  // if (type !== "run" || type !== "bike" || type !== "swim") {
+  //   return false;
+  // }
+  const docSnap = await getDoc(doc(db, "users", user.uid, "workouts", type));
+  console.log("test");
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    return false;
+  }
+}

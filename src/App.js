@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Login from './components/login';
+import Workouts from './components/Workouts';
 import { setDay } from './firebase/db';
 import { signOutUser } from './firebase/auth';
 
@@ -33,6 +34,7 @@ function App() {
       <div>{currUser.displayName}</div>
       <button onClick={handleClick}>Add Day</button>
       <button onClick={signOutUser}>Sign Out</button>
+      <Workouts user={currUser} />
     </div>
   )
 }
