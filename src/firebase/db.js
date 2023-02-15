@@ -94,7 +94,6 @@ export async function getWorkouts(user, type) {
   //   return false;
   // }
   const docSnap = await getDoc(doc(db, "users", user.uid, "workouts", type));
-  console.log("test");
   if (docSnap.exists()) {
     return docSnap.data();
   } else {

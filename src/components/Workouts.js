@@ -1,11 +1,22 @@
 import { getWorkouts } from "../firebase/db";
 import { useState } from "react";
 
-function DropDown({user}) {
+function DropDown({user, currWorkouts, setCurrWorkouts, setType}) {
+  
   async function handleChange(e) {
     const type = e.target.value
+    setType(type);
     const workoutData = await getWorkouts(user, type);
-    console.log(workoutData);
+    const workoutArr = workoutData.workouts;
+    // setCurrWorkouts((currWorkouts) => ({
+    //   ...currWorkouts,
+    //   [type]: workoutArr,
+    // }))
+    
+    setCurrWorkouts({
+      ...currWorkouts,
+      [type]: workoutArr,
+    })
   }
   
   
@@ -22,7 +33,26 @@ function DropDown({user}) {
 
 
 export default function Workouts({user}) {
+  const [currWorkouts, setCurrWorkouts] = useState({
+    "swim": [],
+    "bike": [],
+    "run": [],
+  });
+  const [type, setType] = useState("swim");
+  const selectedData = currWorkouts[type].map(workout => {
+    return (
+      <>
+        <ul>{workout.duration}</ul>
+        <ul>{workout.type}</ul>
+      </>
+    )
+  })
   return (
-    <DropDown user={user} />
+    <div>
+      <DropDown user={user} currWorkouts={currWorkouts} setCurrWorkouts={setCurrWorkouts} setType={setType} />
+      <li>
+        {selectedData}
+      </li>
+    </div>
   )
 }
