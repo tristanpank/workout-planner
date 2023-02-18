@@ -40,20 +40,18 @@ export default function Workouts({user}) {
     "run": [],
   });
   const [type, setType] = useState("swim");
-  const selectedData = currWorkouts[type].map(workout => {
-    return (
-      <ul>
-        <ul>{workout.duration}</ul>
-        <ul>{workout.type}</ul>
-      </ul>
-    )
-  })
+  // const selectedData = currWorkouts[type].map(workout => {
+  //   return (
+  //     <ul>
+  //       <ul>{workout.duration}</ul>
+  //       <ul>{workout.type}</ul>
+  //     </ul>
+  //   )
+  // })
   return (
     <div>
       <DropDown user={user} currWorkouts={currWorkouts} setCurrWorkouts={setCurrWorkouts} setType={setType} />
-      <ul>
-        <WorkoutList data={currWorkouts[type]} />
-      </ul>
+      <WorkoutList data={currWorkouts[type]} />
     </div>
   )
 }
