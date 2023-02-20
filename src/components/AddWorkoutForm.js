@@ -4,6 +4,7 @@ import { addWorkout, getWorkouts } from "../firebase/db";
 export default function AddWorkoutForm({user, type, setCurrWorkouts, currWorkouts, setAddWorkoutVis}) {
   const [formData, setFormData] = useState({type: type});
   
+  // Changes current form data JSON
   function handleChange(e) {
     const data = e.target.value;
     const key = e.target.id;
@@ -13,6 +14,10 @@ export default function AddWorkoutForm({user, type, setCurrWorkouts, currWorkout
     })
   }
 
+  // Submits a form
+  // Ensures that current type is sent to Firebase
+  // On completion, changes the state of current type to cause re render
+  // Then sets form visibility to false to remove form component
   async function handleSubmit(e) {
     e.preventDefault();
     console.log(type);

@@ -15,11 +15,12 @@ export default function WorkoutList({data}) {
     const dataKeys = Object.keys(dataObj);
     const objJSX = dataKeys.map((key) => <div key={key}>{dataObj[key]}</div>)
     temp++;
-    return <div key={temp}>{objJSX}</div>
+    return <div key={temp} className="border border-custom-orange-light border-2 w-24 h-32 flex justify-center 
+    items-center flex-col ">{objJSX}</div>
   });
 
   return (
-    <div>
+    <div className="border border-black flex gap-3 flex-wrap">
       {jsxData}
     </div>
   )
