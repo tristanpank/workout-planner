@@ -68,7 +68,8 @@ export async function setDay(user, day) {
 // Adds a workout JSON to the workout array in firestore
 export async function addWorkout(user, workout) {
   const type = workout.type;
-  if (type !== "run" || type !== "bike" || type !== "swim") {
+  console.log(type);
+  if (type !== "run" && type !== "bike" && type !== "swim") {
     return false;
   }
   await updateDoc(doc(db, "users", user.uid, "workouts", type), {

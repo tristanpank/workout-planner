@@ -1,6 +1,7 @@
 import { getWorkouts } from "../firebase/db";
 import { useState } from "react";
 import WorkoutList from "./WorkoutList";
+import AddWorkoutForm from "./AddWorkoutForm";
 
 function DropDown({user, currWorkouts, setCurrWorkouts, setType}) {
   
@@ -51,6 +52,7 @@ export default function Workouts({user}) {
   return (
     <div>
       <DropDown user={user} currWorkouts={currWorkouts} setCurrWorkouts={setCurrWorkouts} setType={setType} />
+      <AddWorkoutForm user={user} type={type} currWorkouts={currWorkouts} setCurrWorkouts={setCurrWorkouts}/>
       <WorkoutList data={currWorkouts[type]} />
     </div>
   )
