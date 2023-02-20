@@ -41,6 +41,10 @@ export default function Workouts({user}) {
     "run": [],
   });
   const [type, setType] = useState("swim");
+  const [addWorkoutVis, setAddWorkoutVis] = useState(false);
+  function handleWorkoutVis() {
+    setAddWorkoutVis(!addWorkoutVis);
+  }
   // const selectedData = currWorkouts[type].map(workout => {
   //   return (
   //     <ul>
@@ -52,7 +56,8 @@ export default function Workouts({user}) {
   return (
     <div>
       <DropDown user={user} currWorkouts={currWorkouts} setCurrWorkouts={setCurrWorkouts} setType={setType} />
-      <AddWorkoutForm user={user} type={type} currWorkouts={currWorkouts} setCurrWorkouts={setCurrWorkouts}/>
+      <button onClick={handleWorkoutVis}>Add {type}</button>
+      {addWorkoutVis && <AddWorkoutForm user={user} type={type} currWorkouts={currWorkouts} setCurrWorkouts={setCurrWorkouts} setAddWorkoutVis={setAddWorkoutVis}/>}
       <WorkoutList data={currWorkouts[type]} />
     </div>
   )

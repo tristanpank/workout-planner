@@ -30,7 +30,7 @@ function App() {
   }
 
   return(
-    <div>
+    <div className='bg-custom-white h-screen flex flex-col items-center'>
       <div>{currUser.displayName}</div>
       <button onClick={handleClick}>Add Day</button>
       <button onClick={signOutUser}>Sign Out</button>
